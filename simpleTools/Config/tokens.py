@@ -7,13 +7,7 @@ def _tokenize(expr: str) -> list:
         sym = ""
         if expr[i].isdigit():
             sym = expr[i]
-            try:
-                if expr[i - 1] == "-":
-                    sym = "-" + sym
-                    print("find '-': ", sym)
-            except IndexError:
-                pass
-            
+
             digit_i = i + 1
             while digit_i < expr_len:
                 if expr[digit_i].isdigit() or expr[digit_i] == ".": 
@@ -30,11 +24,8 @@ def _tokenize(expr: str) -> list:
             tokens.append(("VAR", sym))
             
         elif expr[i] in "+-*/":
-            if i != 0:
-                sym = expr[i]
-                tokens.append(("OPER", sym))
-            else:
-                print(f"ignore this operator: {expr[i]}, i={i}")
+            sym = expr[i]
+            tokens.append(("OPER", sym))
         elif expr[i] == "(":
             sym = expr[i]
             tokens.append(("LPAR", sym))
